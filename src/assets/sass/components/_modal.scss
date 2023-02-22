@@ -1,0 +1,324 @@
+/*! purgecss start ignore */
+$sk-modal : ".sk-modal";
+
+#{$sk-modal} {
+  position: fixed;
+  z-index: 1500;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  margin: 0 !important;
+  padding-top: calculateRem(70px);
+  color: $black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 0;
+  }
+}
+
+#{$sk-modal}-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+#{$sk-modal}__inner {
+  max-height: 100%;
+  overflow-y: auto;
+  background: $white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation: slide-up 0.4s ease;
+  width: 100%;
+  @at-root #{$sk-modal}--regular-size & {
+    max-width: 27rem;
+  }
+  @at-root #{$sk-modal}--small-size & {
+    max-width: 24rem;
+  }
+  @at-root #{$sk-modal}--700-size & {
+    max-width: calculateRem(700px);
+  }
+  @at-root #{$sk-modal}--large-size & {
+    max-width: calculateRem(768px);
+  }
+    @at-root #{$sk-modal}--900-size & {
+      max-width: calculateRem(989px);
+    }
+
+  @include media-breakpoint-up(md) {
+    border-radius: .25rem;
+  }
+  &-sla {
+    max-width: calculateRem(590px) !important;
+    @include media-breakpoint-down(lg) {
+      max-width: 33rem !important;
+      height: max-content;
+    }
+    @include media-breakpoint-down(sm) {
+      height: 100vh;
+    }
+  }
+  &-new-event {
+    width: 450px;
+    margin-top: -60px;
+    border-left: 16px solid black;
+    
+    &--custom {
+      width: 350px;
+    }
+
+    &--detail {
+      width: 536px;
+    }
+  }
+
+  &--award-info {
+    width: 384px;
+    @include media-breakpoint-down(sm) {
+      width:272px;
+      height: 337px;
+      border-radius: 4px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    }
+    & h4 {
+      font-size: 25px !important;
+      line-height: 35px !important;
+      @include media-breakpoint-down(sm) {
+        font-size: 24px !important;
+      }
+    }
+
+    & p {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 33px;
+      @include media-breakpoint-down(sm) {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 160%;
+      }
+    }
+
+    & .sk-modal__head {
+      padding: 1.875rem 1.875rem 1.125rem 1.875rem;
+      @include media-breakpoint-down(sm) {
+        padding-left: 1rem;
+        align-items: flex-start;
+      }
+    }
+
+    & svg{
+      @include media-breakpoint-down(sm) {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
+    
+    &-voting {
+      width: 460px;
+      height: max-content;
+
+      &-modal {
+        &-info {
+          width: 384px;
+          height: max-content;
+          @include media-breakpoint-down(sm) {
+            width: 272px;
+          }
+          & > div > div > span > p {
+              padding: 0;
+              width: 97%;
+          }
+        }
+      }
+    }
+  }
+}
+
+#{$sk-modal}__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacer;
+  color: $true-black;
+  &--no-title {
+    justify-content: flex-end;
+  }
+  &-sla {
+    align-items: flex-start;
+    &__info {
+      & > span >h4 {
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 35px;
+        @include media-breakpoint-down(sm) {
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 130%;
+        }
+      }
+    }
+  }
+  h4 {
+    @include font-size(1.875rem);
+    line-height: 2.5rem;
+    font-weight: $font-weight-semi-bold;
+    margin: 0;
+  }
+  @include media-breakpoint-up(md) {
+    padding: calculateRem(30px);
+  }
+}
+
+#{$sk-modal}__sticky-head {
+  position: fixed;
+  height: 83px;
+  background-color: #ffff;
+  width: 48rem;
+  h4 {
+    font-size: 30px;
+  }
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+
+  &-shadow {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+#{$sk-modal}__close {
+  cursor: pointer;
+  color: $pink;
+  svg,path {
+    fill: $pink; //TODO: Make classes for the icons to controll this
+  }
+  &-black {
+    svg,path {
+      fill: $black;
+    }
+  }
+}
+
+#{$sk-modal}__foot {
+  padding: calculateRem(30px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $grey;
+  color: $black;
+  a:hover{
+    cursor: pointer;
+  }
+  span {
+    display: inline-block;
+  }
+  .btn {
+    font-weight: $font-weight-semi-bold;
+  }
+}
+
+#{$sk-modal}__body {
+  padding: 0 $spacer $spacer $spacer;
+  @include media-breakpoint-up(md) {
+    padding: 0 calculateRem(30px) calculateRem(30px) calculateRem(30px);
+  }
+
+  &--sla-banner {
+    @include media-breakpoint-up(md) {
+      padding: 0;
+    }
+  }
+}
+
+/*
+ * These are for places where BaseDialog component is not replaced with SkModal
+ * but uses the same classes as SkModal.
+ * TODO: Eventually should be replaced everywhere with SkModal
+ */
+#{$sk-modal}--base-dialog {
+  #{$sk-modal}__body {
+    padding-top: calculateRem(30px);
+  }
+  #{$sk-modal}__foot {
+    padding: calculateRem(15px);
+    justify-content: flex-end;
+    .btn:not(:first-child) {
+      margin-left: calculateRem(15px);
+    }
+  }
+}
+
+/*
+ * Modal animations
+ */
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+ * Custom error messages
+ */
+#{$sk-modal} {
+  .errormessage {
+    color: $pink;
+  }
+}
+/*! purgecss end ignore */
+
+
+.sk-modal__check-availability-type > div > div > div > div > span {
+    @include media-breakpoint-down(sm) {
+    margin-top: -11%;
+  }
+}
+
+#{$sk-modal}__head-availability-modal {
+  @include media-breakpoint-down(sm) {
+    margin-top:34px;
+  }
+}
+
+#{$sk-modal}__head-contract-info {
+  padding-bottom: calculateRem(16px);
+  h4 {
+    font-weight: 600 !important;
+      font-size: calculateRem(25px) !important;
+      line-height: calculateRem(35px) !important;
+      padding-bottom: 0 !important;
+    }
+  &_top {
+    align-items: flex-start;
+  }
+  &_width {
+    h4 {
+      width: 75%;
+    }
+  }
+}
+
+.sk-modal__title-icon {
+  &--warning {
+    background: url(#{$images-folder}/icons/warning-pink.svg) no-repeat;
+    background-position: 0px 13px;
+    width: 53px;
+    height: 59px;
+
+  }
+}

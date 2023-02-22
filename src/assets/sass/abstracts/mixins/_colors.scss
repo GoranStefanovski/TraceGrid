@@ -1,0 +1,13 @@
+@mixin pink-gradient-background($invert:false) {
+  background: $pink-2;
+  @if $invert {
+    @include gradient-directional($pink-2,$pink-3,91.26deg);
+  } @else {
+    @include gradient-directional($pink-3,$pink-2,91.26deg);
+  }
+}
+
+@mixin dark-grey-gradient-background() {
+  background: $dark-grey-2;
+  @include gradient-directional($dark-grey-2,rgba(98, 98, 98, 0),157.07deg);
+}

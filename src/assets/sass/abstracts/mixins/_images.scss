@@ -1,0 +1,20 @@
+@mixin cover-image-container() {
+  overflow: hidden;
+  position: relative;
+  -webkit-transform: translate3d(0,0,0);
+  img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    // -webkit-backface-visibility: hidden;
+    image-rendering: -webkit-optimize-contrast;
+    // transform: translateX(-50%) translateY(-50%) scale(0.1);
+    object-fit: cover;
+  }
+}
+
+img {
+  color: #121212;
+}

@@ -1,0 +1,15 @@
+@mixin filter-bg-circles($circles) {
+  @each $nth, $width, $translate in $circles {
+    &:nth-child(#{$nth}) {
+      @if ($width == 'hidden') {
+        display: none;
+      } @else {
+        width: $width;
+        padding-top: $width;
+        margin-left: $width / 2 * -1;
+        margin-top: $width / 2 * -1;
+        transform: $translate;
+      }
+    }
+  }
+}
