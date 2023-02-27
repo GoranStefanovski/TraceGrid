@@ -1,11 +1,19 @@
 
 <template>
   <div id="app">
-    <nav>
-    </nav>
+    <guest-header></guest-header>
     <router-view/>
   </div>
 </template>
+
+<script>
+  import GuestHeader from "./components/GuestHeader.vue";
+  export default {
+    components: {
+      GuestHeader
+    }
+  }
+</script>
 
 <style lang="scss">
 #app {

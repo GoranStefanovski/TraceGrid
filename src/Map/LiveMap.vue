@@ -1,7 +1,6 @@
 
 <template>
     <div id="map">
-    <!--In the following div the HERE Map will render-->
       <div id="mapContainer" style="height:100vh;" ref="hereMap"></div>
     </div>
 </template>
@@ -24,7 +23,6 @@ export default {
     };
   },
   async mounted() {
-    // Initialize the platform object:
     const platform = new window.H.service.Platform({
       apikey: this.apikey
     });
@@ -62,7 +60,7 @@ export default {
   height: 100vh;
   min-width: 360px;
   text-align: center;
-  margin: 5% auto;
+  margin: auto;
   background-color: #ccc;
 }
 </style>
