@@ -43,20 +43,7 @@ import Auth from '@/features/Auth.vue';
 </script>
 <template>
   <div class="hello">
-    <!-- <ul>
-      <li>USERNAME <input type="text" label="username" /></li>
-      <li>PASSWORD <input type="text" label="password" /></li>
-    </ul>
-    <button @submit="logIn()">Submit</button> -->
-    <!-- <ul>
-      <li @click="openLiveMap()">Events</li>
-      <li @click="openHistoryMap()">History</li>
-    </ul>
-    <live-map v-if="liveMapOpened" ref="hereMap" :center="center" :latitude="37" :longitude="-121"></live-map> 
-    <history-map v-if="historyMapOpened" :center="center" :lng="37" 
-          :lat="-121"
-          :zoom="10" ></history-map>  --> 
-          <Auth></Auth>
+    <Auth></Auth>
   </div>
 </template>  
 

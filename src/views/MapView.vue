@@ -3,19 +3,21 @@
 import { Vue, Component} from 'vue-property-decorator';
 import LiveMap from '../Map/LiveMap.vue';
 import HistoryMap from '../Map/HistoryMap.vue';
-import SkModal from '../features/Modal.vue';
+import Tracking from '../features/Tracking.vue'
 @Component({
   components: {
     LiveMap,
-    SkModal,
     HistoryMap,
+    Tracking
   }
 })
   export default class GuestDefaultPage extends Vue {
+
     hereMap: any;
     center: any;
-    liveMapOpened: Boolean = false;
-    historyMapOpened: Boolean = true;
+    liveMapOpened: Boolean = true;
+    historyMapOpened: Boolean = false;
+
     constructor() {
       super();
       this.center = { 
@@ -26,22 +28,20 @@ import SkModal from '../features/Modal.vue';
     mounted(){
     }
 
-    openLiveMap() {
-      this.liveMapOpened = true;
-      this.historyMapOpened = false;
-    }
-    openHistoryMap() {
-      this.liveMapOpened = false;
-      this.historyMapOpened = true;
+    mapActive(value) {
+      if (value == 1) {
+        this.liveMapOpened = true;
+        this.historyMapOpened = false;
+    } else {
+        this.liveMapOpened = false;
+        this.historyMapOpened = true;
+      }
     }
 }
 </script>
 <template>
   <div class="hello">
-    <ul>
-      <li @click="openLiveMap()">Events</li>
-      <li @click="openHistoryMap()">History</li>
-    </ul>
+    <tracking @setActiveMap="mapActive"></tracking>
     <live-map v-if="liveMapOpened" ref="hereMap" :center="center" :latitude="37" :longitude="-121"></live-map> 
     <history-map v-if="historyMapOpened" :center="center" :lng="37" 
           :lat="-121"

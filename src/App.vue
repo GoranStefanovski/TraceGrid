@@ -6,12 +6,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import { Component, Prop, Vue } from 'vue-property-decorator';
   import GuestHeader from "./components/GuestHeader.vue";
-  export default {
+  
+  @Component({
     components: {
       GuestHeader
     }
+  })
+  
+  export default class App extends Vue {
+
   }
 </script>
 
@@ -23,17 +29,7 @@
   text-align: center;
   color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body {
+  margin: 0;
 }
 </style>

@@ -1,3 +1,70 @@
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import axios from 'axios';
+import { Action, State } from 'vuex-class';
+
+@Component
+export default class Auth extends Vue {
+  @Prop({type: String, default: 'Login'}) title
+  @Action('setToken') setToken;
+  @State('token') token;
+  
+  login: {};
+  errorMessage: String =  '';
+  rememberMe: Boolean = false;
+  constructor() {
+    super();
+
+    this.login = {
+      username:  '',
+      password: ''
+    }
+  }
+  mounted() {
+    
+  }
+
+  LogIn() {
+    axios.post('https://api.dev.tracegrid.com/auth', this.login)
+        .then(response => {
+          this.setToken(response.data.access_token);
+          this.$router.push('/map');
+          this.$auth.login({
+              // @ts-ignore
+              body: {
+              // @ts-ignore
+              email: this.login.email,
+              // @ts-ignore
+              password: this.login.password,
+            },
+            // @ts-ignore
+            remember: this.login.email,
+            staySignedIn: true,
+            // success(response) {
+            //     const { status } = response;
+
+            //     if (status === 401) {
+            //         this.authError = true;
+            //     }
+
+            //     this.setData();
+            // },
+          });
+        })
+        .catch(error => {
+          this.errorMessage = 'Username or Password Invalid'
+          console.log(error)
+        });
+  }
+  signUp() {
+    console.log('Sign Up')
+  }
+  forgotPassword() {
+    console.log('Forgot Password')
+  }
+}
+</script>
+
 <template>
     <div class="main-auth">
         <div class="main-auth-wrap">
@@ -23,7 +90,10 @@
                 </div>
                 <div class="main-auth-inner_button">
                   <button @click="LogIn()">Submit</button>
-                  <span @click="formPost()">Submit</span>
+                  <span class="main-auth-inner_button-extras">
+                    <span @click="forgotPassword()">Forgot Password?</span>
+                    <span @click="signUp()">Sign Up</span>
+                  </span>
                 </div>
               </div>
             </div>  
@@ -31,45 +101,7 @@
     </div>
   </template>
   
-  <script lang="ts">
-  import { Component, Prop, Vue } from 'vue-property-decorator';
-  import axios from 'axios';
-  import { Action, State } from 'vuex-class';
-
-  @Component
-  export default class Auth extends Vue {
-    @Prop({type: String, default: 'Login'}) title
-    @Action('setToken') setToken;
-    @State('token') token;
-    
-    login: {};
-    errorMessage: String =  '';
-    constructor() {
-      super();
-
-      this.login = {
-        username:  '',
-        password: ''
-      }
-    }
-    mounted() {
-      
-    }
-
-    LogIn() {
-      axios.post('https://api.dev.tracegrid.com/auth', this.login)
-          .then(response => {
-            this.setToken(response.data.access_token);
-            this.$router.push('/map')
-          })
-          .catch(error => {
-            this.errorMessage = 'Username or Password Invalid'
-            console.log(error)
-          });
-    }
-  }
-  </script>
-  
+ 
   <style lang="scss" scoped>
   .main-auth {
     position: fixed;
@@ -139,6 +171,18 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        &-extras {
+          display: grid;
+          text-align: right;
+          cursor: pointer;
+        }
+        & > button {
+          width: 40%;
+          height: 40px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
   }

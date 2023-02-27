@@ -1,3 +1,16 @@
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import GuestNav from './GuestNav.vue';
+
+@Component({
+  components: {
+    GuestNav
+  }
+})
+export default class GuestHeader extends Vue {
+}
+</script>
+
 <template>
   <div class="guest_header">
       <div class="guest_header_wrapper">
@@ -6,20 +19,13 @@
         </div>  
         <div class="guest_header_wrapper-right">
           <div class="guest_header_wrapper-right--auth">
-              <h3>Loged IN</h3>
+              <h3>Loged In</h3>
           </div>
         </div>
       </div>
+      <guest-nav></guest-nav>
   </div>
 </template>
-
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
-@Component
-export default class GuestHeader extends Vue {
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">

@@ -1,7 +1,7 @@
 
 <template>
     <div id="map">
-      <div id="mapContainer" style="height:100vh;" ref="hereMap"></div>
+      <div id="mapContainer" style="height:90vh;width:100%" ref="hereMap"></div>
     </div>
 </template>
 
@@ -57,10 +57,10 @@ export default {
 <style scoped>
 #map {
   width: 100%;
-  height: 100vh;
-  min-width: 360px;
-  text-align: center;
-  margin: auto;
-  background-color: #ccc;
+    min-width: 360px;
+    height: 90vh;
+    text-align: center;
+    margin: 2% auto;
+    background-color: #ccc;
 }
 </style>
