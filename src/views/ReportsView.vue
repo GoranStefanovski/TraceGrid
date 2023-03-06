@@ -18,7 +18,7 @@ import { Vue, Component} from 'vue-property-decorator';
 </script>
 <template>
   <div class="hello">
-    <h4>LASJDALKSDJ</h4>
+    <h4>Reports List</h4>
   </div>
 </template>  
 

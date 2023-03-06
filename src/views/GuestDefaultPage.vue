@@ -16,7 +16,7 @@ import { Vue, Component} from 'vue-property-decorator';
 </script>
 <template>
   <div class="hello">
-    <h1>HIHI</h1>
+    <h1>Wlcome to the best tracing app :)</h1>
   </div>
 </template>  
 
