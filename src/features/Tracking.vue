@@ -28,7 +28,6 @@ export default class Tracking extends Vue {
   }
 
   created() {
-    console.log(this.token);
     const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
     const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"0"}
 
@@ -44,7 +43,7 @@ export default class Tracking extends Vue {
         console.log(response)
     })
     .catch((error) => {
-        console.log(error, 'padna vo')
+        console.log(error)
     })
     }
 
