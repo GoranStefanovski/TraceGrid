@@ -27,7 +27,6 @@ export default class Auth extends Vue {
   LogIn() {
     axios.post('https://api.dev.tracegrid.com/auth', this.login)
         .then(response => {
-          localStorage.setItem('user-token', response.data.access_token), // store the token in localstorage
           this.setToken(response.data.access_token);
           this.$router.push('/map');
           this.$auth.login({
@@ -43,6 +42,9 @@ export default class Auth extends Vue {
             remember: this.login.email,
             staySignedIn: true,
           });
+          setTimeout(() => {
+            localStorage.setItem('user-token', response.data.access_token) // store the token in localstorage
+          }, 1000);
         })
         .catch(error => {
           this.errorMessage = 'Username or Password Invalid'
