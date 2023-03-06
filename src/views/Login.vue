@@ -1,22 +1,25 @@
  
 <script lang="ts">
 import { Vue, Component} from 'vue-property-decorator';
-
+import Auth from '@/features/Auth.vue';
 @Component({
   components: {
+    Auth
   }
 })
-  export default class GuestDefaultPage extends Vue {
+export default class Login extends Vue {
+
     constructor() {
       super();
     }
     mounted(){
+        
     }
 }
 </script>
 <template>
   <div class="hello">
-    <h1>HIHI</h1>
+    <Auth></Auth>
   </div>
 </template>  
 

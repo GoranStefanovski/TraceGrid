@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import GuestDefaultPage from '../views/GuestDefaultPage.vue'
 import MapView from '../views/MapView.vue'
 import ReportsView from '../views/ReportsView.vue'
+import LogIn from '../views/Login.vue' 
 
 Vue.use(VueRouter);
 
@@ -11,7 +12,7 @@ const requireToken = (to, from, next) => {
   if (token) {
     next();
   } else {
-    next('/');
+    next('/login');
   }
 };
 
@@ -20,6 +21,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'home',
     component: GuestDefaultPage,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LogIn,
   },
   {
     path: '/map',
