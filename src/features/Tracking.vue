@@ -3,6 +3,7 @@
 import { Vue, Component} from 'vue-property-decorator';
 import axios from 'axios';
 import { Action, State } from 'vuex-class';
+import { ref } from "vue";
 @Component({
   components: {
 
@@ -14,33 +15,36 @@ import { Action, State } from 'vuex-class';
   // data '{"jsonrpc": "2.0","method": "object.list","params": {"with_archived": false,"without_virtual": false},"id": "0"}'
 })
 export default class Tracking extends Vue {
-  @State('token') token;
 
   activeMap : number = 1; 
   body: any;
-
+  drivers: Array<any>;
+  input: any;
+  token: any;
   constructor() {
     super();
-
+    this.drivers = ['Goran', 'Stefan', 'Bozidar', 'Aleksandra'];
+    this.token = sessionStorage.getItem('user-token')
   }
 
   created() {
-    this.body = {"jsonrpc": "2.0","method": "object.list","params": {"with_archived": false,"without_virtual": false},"id": "0"}
-    axios.get('https://api.dev.tracegrid.com/tracegrid_api/client', {
+    console.log(this.token);
+    const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
+    const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"0"}
+
+    axios.post(url, data, {
       headers: {
-        'Authorization': this.token,
-        'Content-Type': 'application/json'
+        'Authorization': `JWT ${this.token}`,
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type',
       },
-      params: {
-        with_archived: false,
-        without_virtual: false
-      }
     })
     .then((response) => {
-          console.log(response);
+        console.log(response)
     })
     .catch((error) => {
-        console.log(error)
+        console.log(error, 'padna vo')
     })
     }
 
@@ -62,9 +66,9 @@ export default class Tracking extends Vue {
           </ul>
         </div>
         <div class="tracking-bar-wrapper_inner">
-          <span class="tracking-bar-wrapper_inner-single">
-            <input type="text" aria-label="search"/>
-          </span>
+          <div class="tracking-bar-wrapper_inner-search">
+            <input type="text" aria-label="search" placeholder="Search..."/>
+          </div>
           <span class="tracking-bar-wrapper_inner-single">
             <input type="checkbox" />
             <h3>Honda CRX</h3>
@@ -99,12 +103,12 @@ export default class Tracking extends Vue {
           justify-content: center;
           cursor: pointer;
           &:hover {
-            background-color: wheat;
+            background-color: gainsboro;
           }
         }
       }
       &-active {
-        background-color: wheat;
+        background-color: gainsboro;
       }
     }
     &_inner {
@@ -112,6 +116,13 @@ export default class Tracking extends Vue {
       overflow-y: scroll;
       height: 86vh;
       max-height: 86vh;
+      &-search {
+        margin: 10px 0;
+        & > input {
+          width: 98%;
+          height: 20px;
+        }
+      }
       &-single {
         display: flex;
         align-items: center;

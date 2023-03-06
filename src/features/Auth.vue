@@ -27,6 +27,7 @@ export default class Auth extends Vue {
   LogIn() {
     axios.post('https://api.dev.tracegrid.com/auth', this.login)
         .then(response => {
+          localStorage.setItem('user-token', response.data.access_token), // store the token in localstorage
           this.setToken(response.data.access_token);
           this.$router.push('/map');
           this.$auth.login({
@@ -38,17 +39,9 @@ export default class Auth extends Vue {
               password: this.login.password,
             },
             // @ts-ignore
+      
             remember: this.login.email,
             staySignedIn: true,
-            // success(response) {
-            //     const { status } = response;
-
-            //     if (status === 401) {
-            //         this.authError = true;
-            //     }
-
-            //     this.setData();
-            // },
           });
         })
         .catch(error => {
@@ -91,8 +84,8 @@ export default class Auth extends Vue {
                 <div class="main-auth-inner_button">
                   <button @click="LogIn()">Submit</button>
                   <span class="main-auth-inner_button-extras">
-                    <span @click="forgotPassword()">Forgot Password?</span>
-                    <span @click="signUp()">Sign Up</span>
+                    <!-- <span @click="forgotPassword()">Forgot Password?</span> -->
+                    <!-- <span @click="signUp()">Sign Up</span> -->
                   </span>
                 </div>
               </div>
