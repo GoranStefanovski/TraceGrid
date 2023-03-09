@@ -1,7 +1,7 @@
 
 <template>
     <div id="map">
-      <div id="mapContainer" style="height:90vh;width:100%" ref="historyMap"></div>
+      <div id="mapContainer" style="height:86.2vh;width:100%" ref="historyMap"></div>
     </div>
   </template>
   
@@ -86,9 +86,9 @@
   #map {
     width: 100%;
     min-width: 360px;
-    height: 90vh;
+    height: 86.2vh;
     text-align: center;
-    margin: 2% auto;
+    margin: 0.5% 0 auto;
     background-color: #ccc;
   }
   </style>

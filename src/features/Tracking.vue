@@ -40,7 +40,7 @@ export default class Tracking extends Vue {
       },
     })
     .then((response) => {
-        console.log(response)
+        console.log(response.data)
     })
     .catch((error) => {
         console.log(error)
@@ -72,6 +72,82 @@ export default class Tracking extends Vue {
             <input type="checkbox" />
             <h3>Honda CRX</h3>
             <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
+          </span>          <span class="tracking-bar-wrapper_inner-single">
+            <input type="checkbox" />
+            <h3>Honda CRX</h3>
+            <p>active</p>
           </span>
         </div>
     </div>
@@ -80,7 +156,7 @@ export default class Tracking extends Vue {
 
 <style scoped lang="scss">
 .tracking-bar {
-  width: 20vw;
+  width: 16vw;
   position: absolute;
   z-index: 33;
   background-color: white;
@@ -113,8 +189,8 @@ export default class Tracking extends Vue {
     &_inner {
       padding: 3px 10px;
       overflow-y: scroll;
-      height: 86vh;
-      max-height: 86vh;
+      height: max-content;
+      max-height: 83vh;
       &-search {
         margin: 10px 0;
         & > input {

@@ -14,8 +14,7 @@ export default class GuestHeader extends Vue {
 <template>
   <div class="guest_header">
       <div class="guest_header_wrapper">
-        <div class="guest_header_wrapper-left">
-          <h2>Logo</h2>
+        <div class="guest_header_wrapper-left" @click="$router.push('/')">
         </div>  
         <div class="guest_header_wrapper-right">
           <div class="guest_header_wrapper-right--auth">
@@ -34,7 +33,17 @@ export default class GuestHeader extends Vue {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 7%;
+    padding: 0 3%;
+    &-left {
+      background-image: url('../assets/images/Tracegridlogo.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 9%;
+      height: 50px;
+      object-fit: cover;
+      cursor: pointer
+    }
   }
 }
 </style>

@@ -49,8 +49,7 @@ export default class Auth extends Vue {
     <div class="main-auth">
         <div class="main-auth-wrap">
             <div class="main-auth-inner">
-              <div class="main-auth-inner_header">
-                <h1>LOGO</h1>
+              <div class="main-auth-inner_header" @click="$router.push('/')">
               </div>
               <div class="main-auth-inner_body">
                 <div class="main-auth-inner_title">
@@ -117,9 +116,17 @@ export default class Auth extends Vue {
     }
     &-inner {
       &_header {
-        background-color: #fafafa;
+        background-image: url('../assets/images/Tracegridlogo.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 130px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        margin: 0 auto;
         padding-top: 1rem;
         border-bottom: 1px solid #e6e6e6;
+        cursor: pointer;
       }
       &_title {
         text-align: left;
