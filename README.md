@@ -1,4 +1,4 @@
-# nestoovo
+# Trace Grid
 
 ## Project setup
 ```
