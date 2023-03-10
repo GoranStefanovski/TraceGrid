@@ -60,8 +60,8 @@ export default class GuestNav extends Vue {
         <div class="guest_nav_wrapper">
             <span class="guest_nav_wrapper-inner">
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li :class="[{'guest_nav-link-active':$route.name == 'map'}]"><router-link to="/map"><Map-icon />Map</router-link></li>
-                <li :class="[{'guest_nav-link-active':$route.name == 'reports'}]"><router-link to="/reports"><mdiListStatus />Reports</router-link></li>
+                <li :class="[{'guest_nav-link-active':$route.name == 'map'}]"><router-link to="/map"><img src="../assets/images/home-analytics.svg"/>Map</router-link></li>
+                <li :class="[{'guest_nav-link-active':$route.name == 'reports'}]"><router-link to="/reports"><img src="../assets/images/format-page-break.svg"/>Reports</router-link></li>
                 <li class="guest_nav-dropdown submenu"><router-link to="">Dropdown »</router-link>
                   <ul class="submenu-2">
                     <li><router-link to="">Dropdown 1</router-link></li>
@@ -164,24 +164,40 @@ export default class GuestNav extends Vue {
 
         &-inner {
             display: flex;
-            width: 99%;
+            padding: 0 10%;
             margin: 0 auto;
             & > ul {
+                padding: 0;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
                 list-style: none;
                 margin: 7px 0 7px 0;
                 & > li > a {
+                    color: rgba(0,0,0,0.65);
                     font-size: .9375rem;
                     cursor: pointer;
                     display: flex;
                     align-items: center;
-                    margin-right: 50px;
+                    margin-right: 15px;
                     padding: 9px 5px;
+                    & > img {
+                      background: darkgray;
+                      padding: 3px;
+                      border-radius: 17px;
+                      display: inline-block;
+                      line-height: 24px;
+                      height: 18px;
+                      width: 18px;
+                      background-color: #e9ecef;
+                      text-align: center;
+                      border-radius: 50%;
+                      margin-right: 10px;
+                      font-size: 13px;
+                      opacity: 0.85;
+                    }
                     &:hover {
-                        border-radius: 10px;
-                        background: gainsboro;
+                        color: black;
                     }
                 }
             }

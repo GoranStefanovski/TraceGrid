@@ -39,7 +39,7 @@ export default class GuestHeader extends Vue {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3%;
+    padding: 0 10%;
     &-left {
       background-image: url('../assets/images/Tracegridlogo.png');
       background-position: center;

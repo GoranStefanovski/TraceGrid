@@ -88,6 +88,7 @@ export default class Tracking extends Vue {
   background-color: white;
   &-wrapper {
     &_menu {
+      border-bottom: 1px solid #dee2e6;
       & > ul {
         display: flex;
         align-items: center;
@@ -96,20 +97,27 @@ export default class Tracking extends Vue {
         padding: 0;
         margin: 0;
         & > li {
-          border: 0.7px solid black;
+          border: 1px solid transparent;
+          border-top-left-radius: 0.2rem;
+          border-top-right-radius: 0.2rem;
           width: 100%;
+          padding: 0.5rem 1rem;
           height: 35px;
           display: flex;
           align-items: center;
           justify-content: center;
+          color: #495057;
+          font-weight: 500;
           cursor: pointer;
           &:hover {
-            background-color: gainsboro;
+            border-color: #e9ecef #e9ecef #dee2e6;
           }
         }
       }
       &-active {
-        background-color: gainsboro;
+        color: #495057;
+        background-color: #f8f8f8;
+        border-color: 0.3px solid gainsboro;
       }
     }
     &_inner {
@@ -120,8 +128,16 @@ export default class Tracking extends Vue {
       &-search {
         margin: 10px 0;
         & > input {
-          width: 98%;
+          width: 88%;
           height: 20px;
+          padding: 3px 10px;
+          font-size: 0.875rem;
+          font-weight: 400;
+          line-height: 1.5;
+          color: #495057;
+          background-color: #fff;
+          background-clip: padding-box;
+          border: 1px solid #ced4da; 
         }
       }
       &-single {
