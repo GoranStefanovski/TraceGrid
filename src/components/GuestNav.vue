@@ -2,15 +2,52 @@
 import { Component, Vue } from 'vue-property-decorator';
 import MapIcon from 'vue-material-design-icons/Map.vue';
 import mdiListStatus from 'vue-material-design-icons/ListStatus.vue';
+import MultiLevelMenu from '@/features/MultiLevelMenu.vue';
 @Component({
     components: {
         MapIcon,
         mdiListStatus,
+        MultiLevelMenu
     }
 })
 export default class GuestNav extends Vue {
+    // submenu: Array<any>;
+
     constructor() {
         super();
+        // this.submenu = [
+        //   {
+        //     title: 'Sub Men 1',
+        //     link: 'Subb'
+        //   },
+        //   {
+        //     title: 'Sub Men 1',
+        //     link: 'Subb'
+        //   },
+        //   {
+        //     title: 'Sub Men 1',
+        //     link: 'Subb'
+        //   },
+        //   {
+        //     title: 'Sub Men 1',
+        //     link: 'Subb',
+        //     levelTwo: [
+        //     {
+        //       option: 'Here'
+        //     },
+        //     {
+        //       option: 'Here'
+        //     },
+        //     {
+        //       option: 'Here'
+        //     },
+        //   ]
+        //   },
+        //   {
+        //     title: 'Sub Men 1',
+        //     link: 'Subb'
+        //   },
+        // ]
     }
 
     created() {
@@ -33,6 +70,7 @@ export default class GuestNav extends Vue {
                     <li><router-link to="">Dropdown 4</router-link></li>
                   </ul>
               </li>
+              <!-- <multi-level-menu :submenu="submenu"></multi-level-menu> -->
               <li class="guest_nav-dropdown submenu"><router-link to="">Submenu »</router-link>
                   <ul class="submenu-2">
                     <li><router-link to="">Sub-submenu 1</router-link></li>

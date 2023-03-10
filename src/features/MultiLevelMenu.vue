@@ -20,7 +20,19 @@ export default class MultiLevelMenu extends Vue {
     }
 
     showFirstLevel() {
-        console.log('ovde')
+        this.firstLevelMenu = true;
+    }
+
+    hideFirstLevel() {
+        this.firstLevelMenu = false;
+    }
+
+    showSecondLevel() {
+        this.secondLevelMenu = true;
+    }
+
+    hideSecondLevel() {
+        this.secondLevelMenu = false;
     }
 }
 </script>
@@ -42,18 +54,44 @@ export default class MultiLevelMenu extends Vue {
         </ul>
     </li> -->
     <span class="main_dropdown">
-        <li>
-            <router-link to="#" @mouseenter="showFirstLevel()">
+        <li  @mouseenter="showFirstLevel()" @mouseleave="hideFirstLevel()">
+            <router-link to="#">
                 Dropdown
             </router-link>
-            <ul class="submenu-second" v-for="(mainOption, index) in submenu" :key="index">
-                <li><router-link :to="mainOption.title">{{ mainOption.title }}</router-link></li>
-                <span v-if="mainOption.levelTwo" class="submenu-2 submenu-4">
-                    <ul v-for="secondOption in mainOption.levelTwo">
-                        <li :key="secondOption"><router-link to="">{{secondOption.option}}</router-link></li>
-                    </ul>
-                </span>
-            </ul>
+                <ul :class="['submenu', {
+                    'submenu-block':firstLevelMenu
+                }]" v-for="(mainOption, index) in submenu" :key="index">
+                    <li @mouseenter="showSecondLevel()" @mouseleave="hideSecondLevel()"><router-link :to="mainOption.title">{{ mainOption.title }}</router-link></li>
+                    <span v-if="mainOption.levelTwo" class="submenu-second">
+                        <ul v-for="secondOption in mainOption.levelTwo" :key="secondOption" :class="['submenu-third', {
+                            'submenu-block':secondLevelMenu
+                        }]">
+                            <li><router-link to="">{{secondOption.option}}</router-link></li>
+                        </ul>
+                    </span>
+                </ul>
         </li>
     </span>
 </template>
+
+
+<style scoped lang="scss">
+    $main: '.main_dropdown';
+
+    #{$main} {
+        .submenu {
+            display: none;
+
+            &-block{
+                display: block !important
+            }
+        }
+        .submenu-second {
+            display: none;
+        }
+
+        .submenu-third {
+            display: none;
+        }
+    }
+</style>

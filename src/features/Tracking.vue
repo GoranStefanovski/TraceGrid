@@ -40,10 +40,11 @@ export default class Tracking extends Vue {
       },
     })
     .then((response) => {
-        console.log(response.data)
+        this.drivers = response.data.result;
+        console.log(this.drivers)
     })
     .catch((error) => {
-        console.log(error)
+        console.log('Error in drivers list api')
     })
     }
 
@@ -68,87 +69,11 @@ export default class Tracking extends Vue {
           <div class="tracking-bar-wrapper_inner-search">
             <input type="text" aria-label="search" placeholder="Search..."/>
           </div>
-          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>          <span class="tracking-bar-wrapper_inner-single">
-            <input type="checkbox" />
-            <h3>Honda CRX</h3>
-            <p>active</p>
-          </span>
+          <span v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
+            <input :value="driver.id" type="checkbox" />
+            <h3>{{ driver.name }}</h3>
+            <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
+          </span>          
         </div>
     </div>
   </div>
