@@ -8,6 +8,12 @@ import GuestNav from './GuestNav.vue';
   }
 })
 export default class GuestHeader extends Vue {
+  mounted() {
+  }
+
+  constructor() {
+    super();
+  }
 }
 </script>
 

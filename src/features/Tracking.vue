@@ -18,18 +18,18 @@ export default class Tracking extends Vue {
 
   activeMap : number = 1; 
   body: any;
-  drivers: Array<any>;
+  drivers: any;
   input: any;
   token: any;
   constructor() {
     super();
-    this.drivers = ['Goran', 'Stefan', 'Bozidar', 'Aleksandra'];
     this.token = sessionStorage.getItem('user-token')
   }
 
-  created() {
+  mounted() {
+    this.activeMap = 1
     const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
-    const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"0"}
+    const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
 
     axios.post(url, data, {
       headers: {
@@ -40,9 +40,7 @@ export default class Tracking extends Vue {
       },
     })
     .then((response) => {
-        console.log(response.data.result);
-        this.drivers = response.data.result;
-        console.log(this.drivers)
+      this.drivers = JSON.parse(response.data.result);
     })
     .catch((error) => {
         console.log('Error in drivers list api')
@@ -71,10 +69,12 @@ export default class Tracking extends Vue {
             <input type="text" aria-label="search" placeholder="Search..."/>
           </div>
           <span v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
-            <input :value="driver.id" type="checkbox" />
-            <h3>{{ driver.name }}</h3>
+            <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
+              <input :value="driver.id" type="checkbox" />
+              <p>{{ driver.name }}</p>
+            </span>
             <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
-          </span>          
+           </span>  
         </div>
     </div>
   </div>
@@ -82,7 +82,7 @@ export default class Tracking extends Vue {
 
 <style scoped lang="scss">
 .tracking-bar {
-  width: 16vw;
+  width: 20vw;
   position: absolute;
   z-index: 33;
   background-color: white;
@@ -131,5 +131,13 @@ export default class Tracking extends Vue {
       }
     }
   }
+  &_info {
+    &-left {
+      & > p {
+        margin-left: 5px;
+
+      }
+    }
+  } 
 }
 </style>
