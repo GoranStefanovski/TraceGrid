@@ -40,6 +40,7 @@ export default class Tracking extends Vue {
       },
     })
     .then((response) => {
+        console.log(response.data.result);
         this.drivers = response.data.result;
         console.log(this.drivers)
     })
