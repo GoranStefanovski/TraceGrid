@@ -44,8 +44,8 @@ export default class GuestHeader extends Vue {
       background-image: url('../assets/images/Tracegridlogo.png');
       background-position: center;
       background-repeat: no-repeat;
-      background-size: cover;
-      width: 9%;
+      background-size: contain;
+      width: 10%;
       height: 50px;
       object-fit: cover;
       cursor: pointer

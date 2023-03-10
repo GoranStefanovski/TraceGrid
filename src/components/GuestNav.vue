@@ -175,7 +175,7 @@ export default class GuestNav extends Vue {
                 margin: 7px 0 7px 0;
                 & > li > a {
                     color: rgba(0,0,0,0.65);
-                    font-size: .9375rem;
+                    font-size: 0.9375rem;
                     cursor: pointer;
                     display: flex;
                     align-items: center;
