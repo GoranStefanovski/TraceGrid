@@ -19,6 +19,8 @@ import { Vue, Component} from 'vue-property-decorator';
 <template>
   <div class="hello">
     <h4>Reports List</h4>
+    <div class="table-responsive"></div>
+    <table></table>
   </div>
 </template>  
 

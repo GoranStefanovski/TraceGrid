@@ -65,7 +65,7 @@ export default class Auth extends Vue {
                 </div>
                 <div class="main-auth-inner_input">
                   <label for="Company">Company</label>
-                  <input name="Company" type="text" required/>
+                  <input v-model="login.company" name="Company" type="text" required/>
                 </div>
                 <div class="main-auth-inner_button">
                   <button @click="LogIn()">Submit</button>
