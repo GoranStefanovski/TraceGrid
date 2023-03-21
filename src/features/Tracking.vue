@@ -5,14 +5,7 @@ import axios from 'axios';
 import { Action, State } from 'vuex-class';
 import { ref } from "vue";
 @Component({
-  components: {
-
-  }
-
-  // API https://api.dev.tracegrid.com/tracegrid_api/client
-  // Authorization
-  // Header 'Content-Type: application/json'
-  // data '{"jsonrpc": "2.0","method": "object.list","params": {"with_archived": false,"without_virtual": false},"id": "0"}'
+  components: {}
 })
 export default class Tracking extends Vue {
 

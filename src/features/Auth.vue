@@ -21,7 +21,6 @@ export default class Auth extends Vue {
     }
   }
   mounted() {
-    
   }
 
   LogIn() {
@@ -35,6 +34,7 @@ export default class Auth extends Vue {
           this.errorMessage = 'Username or Password Invalid'
           console.log(error)
         });
+        setInterval(this.LogIn, 12000)
   }
   signUp() {
     console.log('Sign Up')
