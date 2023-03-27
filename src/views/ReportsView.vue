@@ -1,15 +1,15 @@
  
 <script lang="ts">
 import axios from 'axios';
+import { Action, State } from 'vuex-class';
 import { Vue, Component} from 'vue-property-decorator';
 @Component({
   components: {
   }
 })
   export default class ReportsView extends Vue {
-
+    @State('drivers') drivers;
     token: any;
-    drivers: any;
 
     constructor() {
       super();
@@ -29,7 +29,7 @@ import { Vue, Component} from 'vue-property-decorator';
         },
       })
       .then((response) => {
-        this.drivers = JSON.parse(response.data.result);
+        console.log(this.drivers)
       })
       .catch((error) => {
           console.log('Error in drivers list api')

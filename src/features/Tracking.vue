@@ -8,7 +8,8 @@ import { ref } from "vue";
   components: {}
 })
 export default class Tracking extends Vue {
-
+  @Action('setDrivers') setDrivers;
+  searchTerm: any
   activeMap : number = 1; 
   body: any;
   drivers: any;
@@ -44,6 +45,23 @@ export default class Tracking extends Vue {
     this.activeMap = map;
     this.$emit('setActiveMap', map);
   }
+
+  filteredItems() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("driver_search");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("span")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
 }
 
 </script>
@@ -59,15 +77,18 @@ export default class Tracking extends Vue {
         </div>
         <div class="tracking-bar-wrapper_inner">
           <div class="tracking-bar-wrapper_inner-search">
-            <input type="text" aria-label="search" placeholder="Search..."/>
+            <input type="text" id="driver_search" aria-label="search" placeholder="Search..." v-model="searchTerm" onchange="filteredItems()"/>
           </div>
-          <span v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
-            <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
-              <input :value="driver.id" type="checkbox" />
-              <p>{{ driver.name }}</p>
-            </span>
-            <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
-           </span>  
+          <ul id="muUL">
+            <li v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
+              <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
+                <input :value="driver.id" type="checkbox" />
+                <p>{{ driver.name }}</p>
+              </span>
+              <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
+            </li>  
+          </ul>
+          
         </div>
     </div>
   </div>
