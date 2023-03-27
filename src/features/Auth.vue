@@ -10,31 +10,27 @@ export default class Auth extends Vue {
   @State('token') token;
   
   login: {};
-  nyUsername: String = '';
-  myPassword: String = '';
+  myUsername: String = '';
+  myPassword: string = '';
   myCompany: String = '';
   errorMessage: String =  '';
   rememberMe: Boolean = false;
   constructor() {
     super();
-
-
-  }
-
-  mounted() {
   }
 
   LogIn() {
     this.login = {
-      username: this.myCompany + ';' +this.nyUsername,
+      username: this.myCompany + ';' +this.myUsername,
       password: this.myPassword,
     }
-    console.log(this.login)
     axios.post('https://api.dev.tracegrid.com/auth', this.login)
         .then(response => {
           this.setToken(response.data.access_token);
           sessionStorage.setItem('user-token', response.data.access_token) // store the token in localstorage
           sessionStorage.setItem('is-logged', 'true') // store the token in localstorage
+          sessionStorage.setItem('is-user', this.myCompany + ';' +this.myUsername) // store the token in localstorage
+          sessionStorage.setItem('is-password', this.myPassword) // store the token in localstorage
           this.$router.push('/map');
         })
         .catch(error => {
@@ -63,7 +59,7 @@ export default class Auth extends Vue {
                 </div>
                 <div class="main-auth-inner_input">
                   <label for="Username">Username</label>
-                  <input v-model="nyUsername" name="Username" type="text" required/>
+                  <input v-model="myUsername" name="Username" type="text" required/>
                 </div>
                 <div class="main-auth-inner_input">
                   <label for="Password">Password</label>

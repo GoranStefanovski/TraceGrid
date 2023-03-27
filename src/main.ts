@@ -8,6 +8,8 @@ Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
 
+import 'bootstrap/dist/css/bootstrap-grid.css'
+
 new Vue({
   router,
   store,

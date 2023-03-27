@@ -71,8 +71,14 @@ export default class Tracking extends Vue {
             <input type="text" v-model="searchQuery" @input="filterItems" placeholder="Search...">
           </div>
           <ul>
-            <li v-for="item in drivers" :key="item.id">{{ item.name }}</li>
-          </ul>
+            <li v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
+              <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
+                <input :value="driver.id" type="checkbox" />
+                <p>{{ driver.name }}</p>
+              </span>
+              <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
+            </li>  
+          </ul>          
         </div>
     </div>
   </div>
@@ -123,6 +129,9 @@ export default class Tracking extends Vue {
       overflow-y: scroll;
       height: max-content;
       max-height: 83vh;
+      & > ul {
+        padding-left: 0;
+      }
       &-search {
         margin: 10px 0;
         & > input {
