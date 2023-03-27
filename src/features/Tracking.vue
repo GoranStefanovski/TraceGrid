@@ -8,8 +8,8 @@ import { ref } from "vue";
   components: {}
 })
 export default class Tracking extends Vue {
-  @Action('setDrivers') setDrivers;
-  searchTerm: any
+
+  searchQuery: ''
   activeMap : number = 1; 
   body: any;
   drivers: any;
@@ -46,22 +46,13 @@ export default class Tracking extends Vue {
     this.$emit('setActiveMap', map);
   }
 
-  filteredItems() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("driver_search");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("span")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
+  filterItems() {
+    if(this.searchQuery !== '') {
+      this.drivers = this.drivers.filter(item =>
+        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     }
-}
+  }
 }
 
 </script>
@@ -77,18 +68,11 @@ export default class Tracking extends Vue {
         </div>
         <div class="tracking-bar-wrapper_inner">
           <div class="tracking-bar-wrapper_inner-search">
-            <input type="text" id="driver_search" aria-label="search" placeholder="Search..." v-model="searchTerm" onchange="filteredItems()"/>
+            <input type="text" v-model="searchQuery" @input="filterItems" placeholder="Search...">
           </div>
-          <ul id="muUL">
-            <li v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
-              <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
-                <input :value="driver.id" type="checkbox" />
-                <p>{{ driver.name }}</p>
-              </span>
-              <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
-            </li>  
+          <ul>
+            <li v-for="item in drivers" :key="item.id">{{ item.name }}</li>
           </ul>
-          
         </div>
     </div>
   </div>

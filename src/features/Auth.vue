@@ -10,31 +10,37 @@ export default class Auth extends Vue {
   @State('token') token;
   
   login: {};
+  nyUsername: String = '';
+  myPassword: String = '';
+  myCompany: String = '';
   errorMessage: String =  '';
   rememberMe: Boolean = false;
   constructor() {
     super();
 
-    this.login = {
-      username:  '',
-      password: ''
-    }
+
   }
+
   mounted() {
   }
 
   LogIn() {
+    this.login = {
+      username: this.myCompany + ';' +this.nyUsername,
+      password: this.myPassword,
+    }
+    console.log(this.login)
     axios.post('https://api.dev.tracegrid.com/auth', this.login)
         .then(response => {
           this.setToken(response.data.access_token);
           sessionStorage.setItem('user-token', response.data.access_token) // store the token in localstorage
+          sessionStorage.setItem('is-logged', 'true') // store the token in localstorage
           this.$router.push('/map');
         })
         .catch(error => {
           this.errorMessage = 'Username or Password Invalid'
           console.log(error)
         });
-        setInterval(this.LogIn, 12000)
   }
   signUp() {
     console.log('Sign Up')
@@ -57,15 +63,15 @@ export default class Auth extends Vue {
                 </div>
                 <div class="main-auth-inner_input">
                   <label for="Username">Username</label>
-                  <input v-model="login.username" name="Username" type="text" required/>
+                  <input v-model="nyUsername" name="Username" type="text" required/>
                 </div>
                 <div class="main-auth-inner_input">
                   <label for="Password">Password</label>
-                  <input v-model="login.password" name="Password" type="password" required/>
+                  <input v-model="myPassword" name="Password" type="password" required/>
                 </div>
                 <div class="main-auth-inner_input">
                   <label for="Company">Company</label>
-                  <input v-model="login.company" name="Company" type="text" required/>
+                  <input v-model="myCompany" name="Company" type="text" required/>
                 </div>
                 <div class="main-auth-inner_button">
                   <button @click="LogIn()">Submit</button>
