@@ -82,9 +82,9 @@ export default class Tracking extends Vue {
               </span>
               <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
             </li>  
-            <li class="item error" v-if="searchQuery&&!filteredList().length">
+            <span class="item error" v-if="searchQuery&&!filteredList().length">
               <p>No results found!</p>
-            </li>
+            </span>
           </ul>          
         </div>
     </div>
@@ -138,6 +138,14 @@ export default class Tracking extends Vue {
       max-height: 83vh;
       & > ul {
         padding-left: 0;
+        & > li:hover {
+        border-top: 0.7px solid #495057;
+        border-bottom: 0.7px solid #495057;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
       }
       &-search {
         margin: 10px 0;
