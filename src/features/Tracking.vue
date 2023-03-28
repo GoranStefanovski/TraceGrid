@@ -9,7 +9,7 @@ import { ref } from "vue";
 })
 export default class Tracking extends Vue {
 
-  searchQuery: ''
+  searchQuery: any = '';
   activeMap : number = 1; 
   body: any;
   drivers: any;
@@ -18,10 +18,15 @@ export default class Tracking extends Vue {
   constructor() {
     super();
     this.token = sessionStorage.getItem('user-token')
+    this.drivers = [];
   }
 
-  mounted() {
+  created() {
     this.activeMap = 1
+    this.fetchData();
+  }
+
+  async fetchData() {
     const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
     const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
 
@@ -35,23 +40,22 @@ export default class Tracking extends Vue {
     })
     .then((response) => {
       this.drivers = JSON.parse(response.data.result);
+      console.log(this.drivers, ' od axios')
     })
     .catch((error) => {
         console.log('Error in drivers list api')
     })
-    }
+  }
 
   setMapActive(map) {
     this.activeMap = map;
     this.$emit('setActiveMap', map);
   }
 
-  filterItems() {
-    if(this.searchQuery !== '') {
-      this.drivers = this.drivers.filter(item =>
-        item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    }
+  filteredList() {
+    return this.drivers.filter((driver) =>
+      driver.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
 }
 
@@ -68,16 +72,19 @@ export default class Tracking extends Vue {
         </div>
         <div class="tracking-bar-wrapper_inner">
           <div class="tracking-bar-wrapper_inner-search">
-            <input type="text" v-model="searchQuery" @input="filterItems" placeholder="Search...">
+            <input type="text" v-model="searchQuery" placeholder="Search..." />
           </div>
           <ul>
-            <li v-for="(driver, index) in drivers"  :key="index" class="tracking-bar-wrapper_inner-single">
+            <li v-for="(driver, index) in filteredList()"  :key="index" class="tracking-bar-wrapper_inner-single">
               <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
                 <input :value="driver.id" type="checkbox" />
                 <p>{{ driver.name }}</p>
               </span>
               <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
             </li>  
+            <li class="item error" v-if="searchQuery&&!filteredList().length">
+              <p>No results found!</p>
+            </li>
           </ul>          
         </div>
     </div>
