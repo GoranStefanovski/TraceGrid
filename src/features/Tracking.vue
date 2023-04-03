@@ -2,10 +2,16 @@
 <script lang="ts">
 import { Vue, Component} from 'vue-property-decorator';
 import axios from 'axios';
-import { Action, State } from 'vuex-class';
-import { ref } from "vue";
+import DriverOptions from './DriverOptions.vue';
+import ClickOutside from 'v-click-outside';
+
 @Component({
-  components: {}
+  components: {
+    DriverOptions,
+  },
+  directives: {
+      ClickOutside: ClickOutside.directive
+  }
 })
 export default class Tracking extends Vue {
 
@@ -15,10 +21,17 @@ export default class Tracking extends Vue {
   drivers: any;
   input: any;
   token: any;
+  openOptions: number = 0;
+  options: Array<any>;
   constructor() {
     super();
     this.token = sessionStorage.getItem('user-token')
     this.drivers = [];
+    this.options = [
+        { name: 'See Details One', path:"" },
+        { name: 'See Details Two', path: "" },
+        { name: 'See Details Three', path: "" }
+    ]
   }
 
   created() {
@@ -40,7 +53,6 @@ export default class Tracking extends Vue {
     })
     .then((response) => {
       this.drivers = JSON.parse(response.data.result);
-      console.log(this.drivers, ' od axios')
     })
     .catch((error) => {
         console.log('Error in drivers list api')
@@ -57,6 +69,15 @@ export default class Tracking extends Vue {
       driver.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
+
+    toggleEntryOptions(index) {
+        this.openOptions === index + 1 ? this.openOptions = 0 : this.openOptions = index + 1;
+        console.log('ocdekiii')
+    }
+
+    closeOptions() {
+        this.openOptions = 0;
+    }
 }
 
 </script>
@@ -75,12 +96,18 @@ export default class Tracking extends Vue {
             <input type="text" v-model="searchQuery" placeholder="Search..." />
           </div>
           <ul>
-            <li v-for="(driver, index) in filteredList()"  :key="index" class="tracking-bar-wrapper_inner-single">
+            <li v-for="driver in filteredList()"  :key="driver.id" class="tracking-bar-wrapper_inner-single">
               <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
                 <input :value="driver.id" type="checkbox" />
                 <p>{{ driver.name }}</p>
               </span>
-              <p>{{ driver.distance_type == 1 ? 'Active' : 'Resting'}}</p>
+              <span v-click-outside="closeOptions">
+                <img v-if="driver.distance_type == 1" src="../assets/images/DriverInfo/engine.svg" />
+                <img v-else src="../assets/images/DriverInfo/driver-resting.svg" />
+                <driver-options  :index="driver.id" v-if="(openOptions == driver.id + 1)" :items="options">
+                </driver-options>
+                <img src="../assets/images/driver-menu.svg" @mouseenter="toggleEntryOptions(driver.id)"/>
+              </span>
             </li>  
             <span class="item error" v-if="searchQuery&&!filteredList().length">
               <p>No results found!</p>
@@ -142,9 +169,6 @@ export default class Tracking extends Vue {
         border-top: 0.7px solid #495057;
         border-bottom: 0.7px solid #495057;
         border-radius: 3px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
       }
       }
       &-search {
@@ -166,6 +190,18 @@ export default class Tracking extends Vue {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        & > span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          & > img {
+            margin-right: 5px;
+            width: 24px;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }
@@ -173,7 +209,6 @@ export default class Tracking extends Vue {
     &-left {
       & > p {
         margin-left: 5px;
-
       }
     }
   } 

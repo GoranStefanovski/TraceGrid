@@ -1,12 +1,10 @@
 <script lang="ts">
   import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
-  import ClickOutside from 'v-click-outside';
   import { throttle } from 'lodash-es';
 
 
   @Component({
     directives: {
-      ClickOutside: ClickOutside.directive,
     }
   })
   export default class SkModal extends Vue {
