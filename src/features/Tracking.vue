@@ -28,9 +28,9 @@ export default class Tracking extends Vue {
     this.token = sessionStorage.getItem('user-token')
     this.drivers = [];
     this.options = [
-        { name: 'See Details One', path:"" },
-        { name: 'See Details Two', path: "" },
-        { name: 'See Details Three', path: "" }
+        { name: 'See More Details', action: "see-details" },
+        { name: 'Example No1', action: "see-tours" },
+        { name: 'Example No2', action: "example" }
     ]
   }
 
@@ -78,6 +78,22 @@ export default class Tracking extends Vue {
     closeOptions() {
         this.openOptions = 0;
     }
+
+    getDriverOnClick() {
+      console.log('HEREE')
+      this.openOptions = 0;
+    }
+
+    getPrevoursTours() {
+      console.log('PREVOURS TOUR')
+      this.openOptions = 0;
+    }
+
+    getMoreDetails(prop) {
+      console.log('MORE DETAILS')
+      this.openOptions = 0;
+      this.$emit('see-details-id', prop)
+    }
 }
 
 </script>
@@ -101,10 +117,10 @@ export default class Tracking extends Vue {
                 <input :value="driver.id" type="checkbox" />
                 <p>{{ driver.name }}</p>
               </span>
-              <span v-click-outside="closeOptions">
+              <span>
                 <img v-if="driver.distance_type == 1" src="../assets/images/DriverInfo/engine.svg" />
                 <img v-else src="../assets/images/DriverInfo/driver-resting.svg" />
-                <driver-options  :index="driver.id" v-if="(openOptions == driver.id + 1)" :items="options">
+                <driver-options @example="getDriverOnClick" @see-tours="getPrevoursTours" @see-details="getMoreDetails(driver)" v-click-outside="closeOptions" :index="driver.id" v-if="(openOptions == driver.id + 1)" :items="options">
                 </driver-options>
                 <img src="../assets/images/driver-menu.svg" @mouseenter="toggleEntryOptions(driver.id)"/>
               </span>
@@ -122,6 +138,8 @@ export default class Tracking extends Vue {
 .tracking-bar {
   width: 20vw;
   position: absolute;
+  border-radius: 10px;
+
   z-index: 33;
   background-color: white;
   &-wrapper {

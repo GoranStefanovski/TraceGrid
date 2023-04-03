@@ -18,6 +18,9 @@ export default class DriverOptions extends Vue {
 
     mounted() {}
 
+    setItemAction(item){
+      this.$emit(item.action, item);
+    }
 }
 </script>
 
@@ -26,7 +29,7 @@ export default class DriverOptions extends Vue {
     }]">
         <ul :class="['user-dashboard__options-list', {
         }]">
-            <li v-for="item, index in items" :key="index" class='user-dashboard__options-list-item'>
+            <li v-for="item, index in items" :key="index" @click="setItemAction(item)" class='user-dashboard__options-list-item'>
                 <p>
                     {{ item.name }}
                 </p>
@@ -43,7 +46,7 @@ export default class DriverOptions extends Vue {
     align-items: flex-end;
     background: white;
     padding: 5px 22px;
-    left: 96%;
+    left: 100%;
     width: max-content;
     z-index: 999999999;
     position: absolute;
