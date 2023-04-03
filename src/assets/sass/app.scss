@@ -6,3 +6,13 @@
 @import './components/imports'; 
 @import './abstracts/imports';
 @import '~bootstrap/scss/bootstrap-grid';
+
+@font-face {
+    font-family: "Rubik";
+    src: local("Rubik"),
+     url(~assets/fonts/Rubik/static/Rubik-Regular.ttf) format("truetype");
+}
+
+html {
+    font-family: "Rubik";
+}
