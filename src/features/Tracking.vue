@@ -148,7 +148,7 @@ export default class Tracking extends Vue {
       }
       }
       &-search {
-        margin: 10px 0;
+        padding: 10px 0;
         & > input {
           width: 88%;
           height: 20px;

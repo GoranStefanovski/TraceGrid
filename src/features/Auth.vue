@@ -29,8 +29,6 @@ export default class Auth extends Vue {
           this.setToken(response.data.access_token);
           sessionStorage.setItem('user-token', response.data.access_token) // store the token in localstorage
           sessionStorage.setItem('is-logged', 'true') // store the token in localstorage
-          sessionStorage.setItem('is-user', this.myCompany + ';' +this.myUsername) // store the token in localstorage
-          sessionStorage.setItem('is-password', this.myPassword) // store the token in localstorage
           this.$router.push('/map');
         })
         .catch(error => {
@@ -57,6 +55,7 @@ export default class Auth extends Vue {
                 <div class="main-auth-inner_title">
                   <h2>{{ title }} <br> <span>{{ errorMessage }}</span></h2>
                 </div>
+                <form @submit.prevent="LogIn">
                 <div class="main-auth-inner_input">
                   <label for="Username">Username</label>
                   <input v-model="myUsername" name="Username" type="text" required/>
@@ -76,6 +75,7 @@ export default class Auth extends Vue {
                     <!-- <span @click="signUp()">Sign Up</span> -->
                   </span>
                 </div>
+              </form>
               </div>
             </div>  
         </div> 
