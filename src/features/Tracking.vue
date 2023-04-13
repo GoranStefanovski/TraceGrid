@@ -41,7 +41,7 @@ export default class Tracking extends Vue {
 
   async fetchData() {
     const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
-    const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
+    const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:true,without_virtual:true},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
 
     axios.post(url, data, {
       headers: {
@@ -122,7 +122,7 @@ export default class Tracking extends Vue {
                 <img v-else src="../assets/images/DriverInfo/driver-resting.svg" />
                 <driver-options @example="getDriverOnClick" @see-tours="getPrevoursTours" @see-details="getMoreDetails(driver)" v-click-outside="closeOptions" :index="driver.id" v-if="(openOptions == driver.id + 1)" :items="options">
                 </driver-options>
-                <img src="../assets/images/driver-menu.svg" @mouseenter="toggleEntryOptions(driver.id)"/>
+                <img src="../assets/images/driver-menu.svg" @click="toggleEntryOptions(driver.id)"/>
               </span>
             </li>  
             <span class="item error" v-if="searchQuery&&!filteredList().length">
@@ -219,6 +219,11 @@ export default class Tracking extends Vue {
             &:hover {
               cursor: pointer;
             }
+          }
+        }
+        & > input {
+          &:hover {
+            cursor: pointer;
           }
         }
       }

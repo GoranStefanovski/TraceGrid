@@ -15,13 +15,13 @@ import { Vue, Component} from 'vue-property-decorator';
       this.token = sessionStorage.getItem('user-token')
     }
 
-    mounted() {
+    created() {
       this.fetchData();
     }
 
     async fetchData() {
       const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
-      const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
+      const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"0"}
 
       axios.post(url, data, {
         headers: {
