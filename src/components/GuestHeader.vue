@@ -10,16 +10,13 @@ import GuestNav from './GuestNav.vue';
   }
 })
 export default class GuestHeader extends Vue {
-  @Action('setToken') setToken;
   
-  token: any;
 
   constructor() {
     super(); 
   }
  
   mounted() {
-    this.token = sessionStorage.getItem('user-token')
   }
 
 }
@@ -32,8 +29,7 @@ export default class GuestHeader extends Vue {
         </div>  
         <div class="guest_header_wrapper-right">
           <div class="guest_header_wrapper-right--auth">
-              <h3 v-if="this.token !== null">Loged In</h3>
-              <h3 v-else>Log In</h3>
+              <h3>Log In</h3>
           </div>
         </div>
       </div>

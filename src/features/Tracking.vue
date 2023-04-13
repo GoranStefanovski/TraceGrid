@@ -24,7 +24,8 @@ export default class Tracking extends Vue {
   openOptions: number = 0;
   options: Array<any>;
   checkedDrivers: any;
-
+  actions: any;
+  
   constructor() {
     super();
     this.token = sessionStorage.getItem('user-token')
@@ -33,6 +34,11 @@ export default class Tracking extends Vue {
         { name: 'See More Details', action: "see-details" },
         { name: 'Example No1', action: "see-tours" },
         { name: 'Example No2', action: "example" }
+    ]
+    this.actions = [
+        { id: 1, name: 'Example', action: "act 1" },
+        { id: 2, name: 'Example', action: "act 2" },
+        { id: 3, name: 'Example', action: "act 3" }
     ]
     this.checkedDrivers = [];
   }
@@ -100,6 +106,10 @@ export default class Tracking extends Vue {
     openEvents(prop) {
       this.activeMap = 3;
     }
+
+    makeAction(prop) {
+      console.log(prop)
+    }
 }
 
 </script>
@@ -139,9 +149,7 @@ export default class Tracking extends Vue {
           <span :class="['tracking-bar-wrapper_inner-controls',{
             'tracking-bar-wrapper_inner-controls_acive': checkedDrivers[0]
           }]">
-            <button :disabled="checkedDrivers.length < 1">Example</button>
-            <button :disabled="checkedDrivers.length < 1">Example</button>
-            <button :disabled="checkedDrivers.length < 1">Example</button>
+            <button v-for="action in actions" :key="action.id" :disabled="checkedDrivers.length < 1" @click="makeAction(action.action)">{{action.name}}</button>
           </span>        
         </div>
     </div>
@@ -264,6 +272,10 @@ export default class Tracking extends Vue {
       cursor: pointer;
       & > p {
         margin-left: 5px;
+      }
+      & > input {
+        width: 20px;
+        height: 20px;
       }
     }
   } 
