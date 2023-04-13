@@ -23,6 +23,8 @@ export default class Tracking extends Vue {
   token: any;
   openOptions: number = 0;
   options: Array<any>;
+  checkedDrivers: any;
+
   constructor() {
     super();
     this.token = sessionStorage.getItem('user-token')
@@ -32,6 +34,7 @@ export default class Tracking extends Vue {
         { name: 'Example No1', action: "see-tours" },
         { name: 'Example No2', action: "example" }
     ]
+    this.checkedDrivers = [];
   }
 
   created() {
@@ -72,7 +75,6 @@ export default class Tracking extends Vue {
 
     toggleEntryOptions(index) {
         this.openOptions === index + 1 ? this.openOptions = 0 : this.openOptions = index + 1;
-        console.log('ocdekiii')
     }
 
     closeOptions() {
@@ -94,6 +96,10 @@ export default class Tracking extends Vue {
       this.openOptions = 0;
       this.$emit('see-details-id', prop)
     }
+
+    openEvents(prop) {
+      this.activeMap = 3;
+    }
 }
 
 </script>
@@ -103,18 +109,18 @@ export default class Tracking extends Vue {
         <div class="tracking-bar-wrapper_menu">
           <ul>
             <li @click="setMapActive(1)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 1}]">Objects</li>
-            <li>Events</li>
+            <li @click="openEvents(3)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 3}]">Events</li>
             <li @click="setMapActive(2)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 2}]">History</li>
           </ul>
         </div>
-        <div class="tracking-bar-wrapper_inner">
+        <div v-if="this.activeMap !== 3" class="tracking-bar-wrapper_inner">
           <div class="tracking-bar-wrapper_inner-search">
             <input type="text" v-model="searchQuery" placeholder="Search..." />
           </div>
           <ul>
             <li v-for="driver in filteredList()"  :key="driver.id" class="tracking-bar-wrapper_inner-single">
               <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
-                <input :value="driver.id" type="checkbox" />
+                <input :value="driver.id" type="checkbox" v-model="checkedDrivers" />
                 <p>{{ driver.name }}</p>
               </span>
               <span>
@@ -128,7 +134,15 @@ export default class Tracking extends Vue {
             <span class="item error" v-if="searchQuery&&!filteredList().length">
               <p>No results found!</p>
             </span>
-          </ul>          
+          </ul> 
+          <hr>
+          <span :class="['tracking-bar-wrapper_inner-controls',{
+            'tracking-bar-wrapper_inner-controls_acive': checkedDrivers[0]
+          }]">
+            <button :disabled="checkedDrivers.length < 1">Example</button>
+            <button :disabled="checkedDrivers.length < 1">Example</button>
+            <button :disabled="checkedDrivers.length < 1">Example</button>
+          </span>        
         </div>
     </div>
   </div>
@@ -212,7 +226,11 @@ export default class Tracking extends Vue {
         & > span {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
+          width: 100%;
+          &:first-child {
+            justify-content: flex-start;
+          }
           & > img {
             margin-right: 5px;
             width: 24px;
@@ -227,10 +245,23 @@ export default class Tracking extends Vue {
           }
         }
       }
+      &-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex: 1;
+        & > button {
+          background: #ced4da;
+          cursor: pointer;
+          padding: 3px 6px;
+          border-radius: 3px;
+        }
+      }
     }
   }
   &_info {
     &-left {
+      cursor: pointer;
       & > p {
         margin-left: 5px;
       }
