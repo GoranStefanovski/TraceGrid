@@ -18,28 +18,62 @@ import { Vue, Prop, Component} from 'vue-property-decorator';
 </script>
 <template>
   <div class="more_details-wrap">
-    <h3>Drivers ID: {{items.id}}</h3>
-    <h3>Drivers distance_type: {{items.distance_type}}</h3>
-    <h3>Drivers ignition_configured: {{items.ignition_configured}}</h3>
-    <h3>Drivers name: {{items.name}}</h3>
-    <h3>Drivers garmin: {{items.garmin}}</h3>
+    <div class="more_details-box">
+        <h3>Drivers ID: <span>{{items.id}}</span></h3>
+        <h3>Drivers distance_type: <span>{{items.distance_type}}</span></h3>
+        <h3>Drivers ignition_configured: <span>{{items.ignition_configured}}</span></h3>
+        <h3>Drivers name: <span>{{items.name}}</span></h3>
+        <h3>Drivers garmin: <span>{{items.garmin}}</span></h3>
+    </div>
+    <div class="more_details-box">
+        <h3>Drivers ID: <span>{{items.id}}</span></h3>
+        <h3>Drivers distance_type: <span>{{items.distance_type}}</span></h3>
+        <h3>Drivers ignition_configured: <span>{{items.ignition_configured}}</span></h3>
+        <h3>Drivers name: <span>{{items.name}}</span></h3>
+        <h3>Drivers garmin: <span>{{items.garmin}}</span></h3>
+    </div>
+    <div class="more_details-box">
+        <h3>Drivers ID: <span>{{items.id}}</span></h3>
+        <h3>Drivers distance_type: <span>{{items.distance_type}}</span></h3>
+        <h3>Drivers ignition_configured: <span>{{items.ignition_configured}}</span></h3>
+        <h3>Drivers name: <span>{{items.name}}</span></h3>
+        <h3>Drivers garmin: <span>{{items.garmin}}</span></h3>
+    </div>
   </div>
 </template>  
 
 <style scoped lang="scss">
 .more_details {
-    &-wrap {
-        border-radius: 10px;
-        z-index: 99999;
-        height: 178px;
-        background: white;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 73vw;
-        & > h1 {
-            font-size: 20px;
+  &-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 10px;
+      z-index: 99999;
+      height: auto;
+      background: white;
+      box-shadow: 0px 6px 10px 0 rgb(0 0 0 / 5%);
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      flex: 1;
+      width: 73vw;
+  }
+  &-box {
+    flex: 0.33%;
+    text-align: left;
+    padding-left: 10px;
+    & > h3 {
+          font-size: 20px;
+          font-weight: bolder;
+        & > span {
+          font-size: 18px;
+          font-weight: bold;
         }
+      }
+      &:not(:last-child) {
+        border-right: 0.3px solid #495057;
+      }
     }
-}
+  }
 </style>

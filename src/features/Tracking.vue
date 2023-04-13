@@ -139,6 +139,7 @@ export default class Tracking extends Vue {
   width: 20vw;
   position: absolute;
   border-radius: 10px;
+  box-shadow: 0px 6px 10px 0 rgb(0 0 0 / 5%);
 
   z-index: 33;
   background-color: white;
