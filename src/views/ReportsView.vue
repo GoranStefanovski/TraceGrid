@@ -11,6 +11,7 @@ import { Vue, Component} from 'vue-property-decorator';
     drivers: any;
     constructor() {
       super();
+      this.drivers = [];
       this.token = sessionStorage.getItem('user-token')
     }
 
@@ -42,7 +43,7 @@ import { Vue, Component} from 'vue-property-decorator';
 <template>
   <div class="container reports_view">
       <h4>Reports List</h4>
-      <table id="customers" class="col-lg-12">
+      <table id="customers" class="col-lg-12 col-md-12 col-sm-12">
         <tr>
           <th>Driver</th>
           <th>Is Active</th>
@@ -88,5 +89,12 @@ import { Vue, Component} from 'vue-property-decorator';
   text-align: center;
   background-color: rgba(0, 0, 0, 0.65);
   color: white;
+}
+#customers  {
+  & > tr > td {
+    &:hover {
+      cursor: pointer;
+    }
+  } 
 }
 </style>
