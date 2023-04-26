@@ -1,7 +1,6 @@
  
 <script lang="ts">
 import axios from 'axios';
-import { Action, State } from 'vuex-class';
 import { Vue, Component} from 'vue-property-decorator';
 @Component({
   components: {
@@ -21,7 +20,7 @@ import { Vue, Component} from 'vue-property-decorator';
 
     async fetchData() {
       const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
-      const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"0"}
+      const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
 
       axios.post(url, data, {
         headers: {

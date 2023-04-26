@@ -146,6 +146,11 @@ export default class GuestNav extends Vue {
   .submenu-3 {
     & > .submenu-4 {
       left: 50% !important;
+      display: block;
+
+      &:hover {
+        display: block;
+      }
     }
   }
   .submenu {

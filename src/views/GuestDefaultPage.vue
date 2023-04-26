@@ -15,20 +15,20 @@ import { Vue, Component} from 'vue-property-decorator';
 }
 </script>
 <template>
-  <div class="hello">
-    <h1>Wlcome to the best tracing app :)</h1>
+  <div class="container">
+    <div class="col-lg-12 default_page">
+      <div class="default_page-header">
+        <h1>GPS vehicle tracking and sensor monitoring</h1>
+        <p>The ultimate vehicle tracking tool for your fleet.</p>
+      </div>
+    </div>
   </div>
 </template>  
 
 <style scoped lang="scss">
-.hello > ul {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  li {
-    color: black;
-    margin: 10px 20px;
-    list-style: none;
+.default_page {
+  &-header {
+    text-align: left;
   }
 }
 </style>

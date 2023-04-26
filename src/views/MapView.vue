@@ -44,7 +44,6 @@ import MoreDetails from '@/features/MoreDetails.vue';
     }
 
     getItem(item) {
-      console.log(item)
       this.driverDetails = item;
       this.showMoreDetails = true;
     }

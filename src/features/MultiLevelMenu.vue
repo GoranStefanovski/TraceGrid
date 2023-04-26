@@ -15,10 +15,6 @@ export default class MultiLevelMenu extends Vue {
         super();
     }
 
-    created() {
-        console.log(this.submenu)
-    }
-
     showFirstLevel() {
         this.firstLevelMenu = true;
     }
