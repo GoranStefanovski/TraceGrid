@@ -40,6 +40,7 @@ export default class GuestHeader extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .guest_header {
+  background: white;
   &_wrapper {
     display: flex;
     justify-content: space-between;
