@@ -2,10 +2,12 @@
 <script lang="ts">
 import { Vue, Component} from 'vue-property-decorator';
 import BoxBanner from '@/features/BoxBanner.vue';
+import GuestFooter from '@/components/GuestFooter.vue';
 
 @Component({
   components: {
-    BoxBanner
+    BoxBanner,
+    GuestFooter
   }
 })
   export default class GuestDefaultPage extends Vue {
@@ -94,6 +96,7 @@ import BoxBanner from '@/features/BoxBanner.vue';
     <div class="container-fluid default_page-section" style="padding: 0">
       <box-banner :infos="pricingInfo" :isBgWhite="true" infoName="pricing" title="Pricing Packages:"></box-banner>
     </div>
+    <guest-footer></guest-footer>
   </div>
 </template>  
 

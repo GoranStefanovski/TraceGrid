@@ -131,7 +131,7 @@ export default class GuestNav extends Vue {
   }
   & > a {
     & > img {
-      background: darkgray;
+    background: darkgray;
                         padding: 3px;
                         border-radius: 17px;
                         display: inline-block;
