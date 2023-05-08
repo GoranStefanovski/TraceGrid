@@ -68,10 +68,10 @@ export default class GuestNav extends Vue {
                     <a>Reports</a>
                 </li>
                 <li class="topmenu">
-                    <a>settings ></a>
+                    <a>settings <img src="../assets/images/arrow-down.svg" alt="arrow-right"/></a>
                     <ul class="submenu">
                         <li>
-                            <a>font ></a>
+                            <a>font <img src="../assets/images/arrow-right.svg" alt="arrow-right"/></a>
                             <ul class="submenu">
                                 <li><a>larger</a></li>
                                 <li><a>smaller</a></li>
@@ -80,7 +80,7 @@ export default class GuestNav extends Vue {
                             </ul>
                         </li>
                         <li>
-                            <a>indentation ></a>
+                            <a>indentation <img src="../assets/images/arrow-right.svg" alt="arrow-right"/></a>
                             <ul class="submenu">
                                 <li><a>+1 space</a></li>
                                 <li><a>-1 space</a></li>
@@ -110,6 +110,9 @@ export default class GuestNav extends Vue {
   align-items: flex-start;
 	}
 .cm-e-menu ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 	margin: 0;
   padding: 0 2.5%;
 }
@@ -131,19 +134,36 @@ export default class GuestNav extends Vue {
   }
   & > a {
     & > img {
-    background: darkgray;
-                        padding: 3px;
-                        border-radius: 17px;
-                        display: inline-block;
-                        line-height: 24px;
-                        height: 18px;
-                        width: 18px;
-                        background-color: #e9ecef;
-                        text-align: center;
-                        border-radius: 50%;
-                        margin-right: 10px;
-                        font-size: 13px;
-                        opacity: 0.85;
+      background: darkgray;
+      padding: 3px;
+      border-radius: 17px;
+      display: inline-block;
+      line-height: 24px;
+      height: 18px;
+      width: 18px;
+      background-color: #e9ecef;
+      text-align: center;
+      border-radius: 50%;
+      margin-left: 10px;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+  }
+  & > .one {
+    & > img {
+      background: darkgray;
+      padding: 3px;
+      border-radius: 17px;
+      display: inline-block;
+      line-height: 24px;
+      height: 18px;
+      width: 18px;
+      background-color: #e9ecef;
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: 13px;
+      opacity: 0.85;
     }
   }
 }
@@ -152,15 +172,23 @@ export default class GuestNav extends Vue {
 	text-shadow: 0 10px 10px white;
 }
 .cm-e-menu ul li.topmenu {
-	display: inline-table;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 400;
-  padding: 0.5rem 0.5rem;
-        min-width: 100px;
-        font-weight: 400;
-        color: #334053;
-        &:hover {
-          cursor: pointer;
-        }
+  padding: 0.5rem 1rem 0.5rem 0;
+  min-width: 60px;
+  font-weight: 400;
+  color: #334053;
+  &:hover {
+    cursor: pointer;
+  }
+  & > a {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 .cm-e-menu .topmenu ul {
 	display:none;
@@ -174,6 +202,7 @@ export default class GuestNav extends Vue {
 	top: 100%; left: 0;
 	padding-top: .5em;
 	padding-bottom: .5em;	
+  box-shadow: 0 4px 18px rgba(0,0,0,0.11);
 }
 .cm-e-menu ul.submenu .submenu {
 	top: -.5em; left: 100%;
@@ -182,6 +211,11 @@ export default class GuestNav extends Vue {
 .cm-e-menu ul.submenu li {
 	padding: .2em 1.5em;
 	font-size: .9rem;
+  & > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 .cm-e-menu li.divider {
 	padding: 0;

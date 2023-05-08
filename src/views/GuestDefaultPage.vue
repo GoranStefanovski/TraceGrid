@@ -3,11 +3,13 @@
 import { Vue, Component} from 'vue-property-decorator';
 import BoxBanner from '@/features/BoxBanner.vue';
 import GuestFooter from '@/components/GuestFooter.vue';
+import Contact from '@/features/Contact.vue';
 
 @Component({
   components: {
     BoxBanner,
-    GuestFooter
+    GuestFooter,
+    Contact
   }
 })
   export default class GuestDefaultPage extends Vue {
@@ -95,8 +97,10 @@ import GuestFooter from '@/components/GuestFooter.vue';
     </div>
     <div class="container-fluid default_page-section" style="padding: 0">
       <box-banner :infos="pricingInfo" :isBgWhite="true" infoName="pricing" title="Pricing Packages:"></box-banner>
+    </div>    
+    <div class="container-fluid default_page-section" style="padding: 0">
+      <contact></contact>
     </div>
-    <guest-footer></guest-footer>
   </div>
 </template>  
 

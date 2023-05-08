@@ -16,7 +16,6 @@ export default class BoxBanner extends Vue {
 
 <template>
     <div :class="['features', {
-        'features-white':isBgWhite
     }]">
         <div class="container features-wrap">
             <h1>{{ title }}</h1>
@@ -63,8 +62,11 @@ export default class BoxBanner extends Vue {
         }
     }
     &-box {
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        background: #fff;
+        box-shadow: 0 0 15px 0 rgba(0,0,0,0.05);
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid #e9ecef;
+        border-radius: 0.2rem;
         padding: 25px 15px;
         margin: 20px;
         &-wrap {

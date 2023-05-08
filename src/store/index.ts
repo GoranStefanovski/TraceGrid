@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     token: '',
     drivers: [],
+    isLogged: false,
   },
   getters: {
   },
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     mutateDrivers: (state, obj) => {
       state.drivers = obj
+    },
+    mutateIsLogged: (state, obj) => {
+      state.isLogged = obj
     }
   },
   actions: {
@@ -24,6 +28,9 @@ export default new Vuex.Store({
     },
     setDrivers: ({ commit }, obj) =>{
       commit('mutateDrivers', obj);
+    },
+    setIsLogged: ({ commit }, obj) => {
+      commit('mutateIsLogged', obj)
     }
   },
   modules: {

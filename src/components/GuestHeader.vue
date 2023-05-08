@@ -10,6 +10,7 @@ import GuestNav from './GuestNav.vue';
   }
 })
 export default class GuestHeader extends Vue {
+  @State('isLogged') isLogged;
   
 
   constructor() {
@@ -29,7 +30,8 @@ export default class GuestHeader extends Vue {
         </div>  
         <div class="guest_header_wrapper-right">
           <div class="guest_header_wrapper-right--auth">
-              <h3>Log In</h3>
+              <h3 v-if="!isLogged"><router-link to="/login">Log In</router-link></h3>
+              <h3 v-else>Logged In</h3>
           </div>
         </div>
       </div>
@@ -51,7 +53,7 @@ export default class GuestHeader extends Vue {
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
-      width: 7%;
+      width: 6%;
       height: 50px;
       object-fit: cover;
       cursor: pointer

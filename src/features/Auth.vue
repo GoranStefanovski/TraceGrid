@@ -7,6 +7,7 @@ import { Action, State } from 'vuex-class';
 export default class Auth extends Vue {
   @Prop({type: String, default: 'Login'}) title
   @Action('setToken') setToken;
+  @Action('setIsLogged') setIsLogged;
   @State('token') token;
   
   login: {};
@@ -29,6 +30,7 @@ export default class Auth extends Vue {
           this.setToken(response.data.access_token);
           sessionStorage.setItem('user-token', response.data.access_token) // store the token in localstorage
           sessionStorage.setItem('is-logged', 'true') // store the token in localstorage
+          this.setIsLogged(true);
           this.$router.push('/map');
         })
         .catch(error => {

@@ -55,7 +55,7 @@ export default class GuestFooter extends Vue {
 .guest_footer {
   background: #f2f2f2;
   margin: 0;
-  padding: 30px 0;
+  padding: 80px 0 30px 0;
   &_wrapper {
     padding: 0;
     margin: 0;
