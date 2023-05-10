@@ -4,10 +4,13 @@ import { Vue, Component} from 'vue-property-decorator';
 import axios from 'axios';
 import DriverOptions from './DriverOptions.vue';
 import ClickOutside from 'v-click-outside';
-
+import VehicleList from '@/components/VehicleSearch/VehicleList.vue';
+import Events from '../components/VehicleSearch/Events.vue'
 @Component({
   components: {
     DriverOptions,
+    VehicleList,
+    Events
   },
   directives: {
       ClickOutside: ClickOutside.directive
@@ -15,101 +18,21 @@ import ClickOutside from 'v-click-outside';
 })
 export default class Tracking extends Vue {
 
-  searchQuery: any = '';
+  searchOption: number = 1;
   activeMap : number = 1; 
-  body: any;
-  drivers: any;
-  input: any;
-  token: any;
-  openOptions: number = 0;
-  options: Array<any>;
-  checkedDrivers: any;
-  actions: any;
-  
+
   constructor() {
     super();
-    this.token = sessionStorage.getItem('user-token')
-    this.drivers = [];
-    this.options = [
-        { name: 'See More Details', action: "see-details" },
-        { name: 'Example No1', action: "see-tours" },
-        { name: 'Example No2', action: "example" }
-    ]
-    this.actions = [
-        { id: 1, name: 'Example', action: "act 1" },
-        { id: 2, name: 'Example', action: "act 2" },
-        { id: 3, name: 'Example', action: "act 3" }
-    ]
-    this.checkedDrivers = [];
   }
 
   created() {
-    this.activeMap = 1
-    this.fetchData();
   }
 
-  async fetchData() {
-    const url = 'https://api.dev.tracegrid.com/tracegrid_api/client';
-    const data = {jsonrpc:"2.0",method:"object.list",params:{with_archived:false,without_virtual:false},id:"d1a01959-1a58-472b-a1cf-2a1ce805651b"}
-
-    axios.post(url, data, {
-      headers: {
-        'Authorization': `JWT ${this.token}`,
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-    })
-    .then((response) => {
-      this.drivers = JSON.parse(response.data.result);
-    })
-    .catch((error) => {
-        console.log('Error in drivers list api')
-    })
+  openSearchOption(prop) {
+    this.searchOption = prop;
+    this.activeMap = prop;
+    this.$emit('setActiveMap', prop);
   }
-
-  setMapActive(map) {
-    this.activeMap = map;
-    this.$emit('setActiveMap', map);
-  }
-
-  filteredList() {
-    return this.drivers.filter((driver) =>
-      driver.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-  }
-
-    toggleEntryOptions(index) {
-        this.openOptions === index + 1 ? this.openOptions = 0 : this.openOptions = index + 1;
-    }
-
-    closeOptions() {
-        this.openOptions = 0;
-    }
-
-    getDriverOnClick() {
-      console.log('HEREE')
-      this.openOptions = 0;
-    }
-
-    getPrevoursTours() {
-      console.log('PREVOURS TOUR')
-      this.openOptions = 0;
-    }
-
-    getMoreDetails(prop) {
-      console.log('MORE DETAILS')
-      this.openOptions = 0;
-      this.$emit('see-details-id', prop)
-    }
-
-    openEvents(prop) {
-      this.activeMap = 3;
-    }
-
-    makeAction(prop) {
-      console.log(prop)
-    }
 }
 
 </script>
@@ -118,40 +41,13 @@ export default class Tracking extends Vue {
     <div class="tracking-bar-wrapper">
         <div class="tracking-bar-wrapper_menu">
           <ul>
-            <li @click="setMapActive(1)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 1}]">Objects</li>
-            <li @click="openEvents(3)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 3}]">Events</li>
-            <li @click="setMapActive(2)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 2}]">History</li>
+            <li @click="openSearchOption(1)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 1}]">Objects</li>
+            <li @click="openSearchOption(3)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 3}]">Events</li>
+            <li @click="openSearchOption(2)" :class="[{'tracking-bar-wrapper_menu-active': this.activeMap == 2}]">History</li>
           </ul>
         </div>
-        <div v-if="this.activeMap !== 3" class="tracking-bar-wrapper_inner">
-          <div class="tracking-bar-wrapper_inner-search">
-            <input type="text" v-model="searchQuery" placeholder="Search..." />
-          </div>
-          <ul>
-            <li v-for="driver in filteredList()"  :key="driver.id" class="tracking-bar-wrapper_inner-single">
-              <span class="tracking-bar-wrapper_inner-single tracking-bar_info-left">
-                <input :value="driver.id" type="checkbox" v-model="checkedDrivers" />
-                <p>{{ driver.name }}</p>
-              </span>
-              <span>
-                <img v-if="driver.distance_type == 1" src="../assets/images/DriverInfo/engine.svg" />
-                <img v-else src="../assets/images/DriverInfo/driver-resting.svg" />
-                <driver-options @example="getDriverOnClick" @see-tours="getPrevoursTours" @see-details="getMoreDetails(driver)" v-click-outside="closeOptions" :index="driver.id" v-if="(openOptions == driver.id + 1)" :items="options">
-                </driver-options>
-                <img src="../assets/images/driver-menu.svg" @click="toggleEntryOptions(driver.id)"/>
-              </span>
-            </li>  
-            <span class="item error" v-if="searchQuery&&!filteredList().length">
-              <p>No results found!</p>
-            </span>
-          </ul> 
-          <hr>
-          <span :class="['tracking-bar-wrapper_inner-controls',{
-            'tracking-bar-wrapper_inner-controls_acive': checkedDrivers[0]
-          }]">
-            <button v-for="action in actions" :key="action.id" :disabled="checkedDrivers.length < 1" @click="makeAction(action.action)">{{action.name}}</button>
-          </span>        
-        </div>
+        <vehicle-list v-if="searchOption == 1"></vehicle-list>
+        <events v-if="searchOption == 3"></events>
     </div>
   </div>
 </template>  

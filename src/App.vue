@@ -3,7 +3,7 @@
   <div id="app">
     <guest-header></guest-header>
     <router-view/>
-    <guest-footer v-if="this.$route.name !== 'map'"></guest-footer>
+    <guest-footer v-if="this.$route.name !== 'map'" :isMarginTop="this.$route.name == 'home' ? false : true"></guest-footer>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
   
   export default class App extends Vue {
     mounted() {
-      console.log()
+      
     }
   }
 </script>

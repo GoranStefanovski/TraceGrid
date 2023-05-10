@@ -108,6 +108,8 @@ export default class GuestNav extends Vue {
 	font-weight: 200;
   display: flex;
   align-items: flex-start;
+  box-shadow: 0px 6px 10px 0 rgba(0,0,0,0.05);
+
 	}
 .cm-e-menu ul {
   display: flex;
@@ -175,17 +177,19 @@ export default class GuestNav extends Vue {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 400;
   padding: 0.5rem 1rem 0.5rem 0;
   min-width: 60px;
+  font-size: .9375rem;
   font-weight: 400;
-  color: #334053;
+  color: rgba(0,0,0,0.65);
   &:hover {
     cursor: pointer;
+    color: black;
   }
   & > a {
     padding: 0 10px;
     display: flex;
+    font-weight: 400;
     align-items: center;
     justify-content: space-between;
   }

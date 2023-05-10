@@ -6,7 +6,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class GuestFooter extends Vue {
-  
+  @Prop({type: Boolean, default: false}) isMarginTop;
 
   constructor() {
     super(); 
@@ -20,27 +20,29 @@ export default class GuestFooter extends Vue {
 
 <template>
   <footer>
-    <div class="container-fluid guest_footer">
+    <div :class="['container-fluid guest_footer', {
+      'guest_footer--margin-top':isMarginTop
+    }]">
       <div class="row guest_footer_wrapper">
         <div class="container">
           <div class="col-md-3">
-            <h4>About Us</h4>
+            <h2>About Us</h2>
             <p>We are a GPS tracking company that provides real-time vehicle tracking solutions to businesses and individuals.</p>
           </div>
           <div class="col-md-3">
-            <h4>Contact Us</h4>
+            <h2>Contact Us</h2>
             <p>123 Main Street<br>
             Anytown, USA 12345<br>
             Phone: 555-555-5555<br>
             Email: info@yourcompany.com</p>
           </div>
           <div class="col-md-3">
-            <h4>Follow Us</h4>
+            <h2>Follow Us</h2>
             <p>Stay connected with us on social media for the latest news and updates.</p>
             <ul class="social-icons">
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+              <li><a target="_blank" href="https://twitter.com/home"><i class="fa fa-twitter"></i></a></li>
+              <li><a target="_blank" href="https://instagram.com"><i class="fa fa-instagram"></i></a></li>
             </ul>
           </div>
         </div>
@@ -56,6 +58,10 @@ export default class GuestFooter extends Vue {
   background: #f2f2f2;
   margin: 0;
   padding: 80px 0 30px 0;
+  &--margin-top {
+    padding: 30px 0 !important;
+    margin-top: 50px;
+  }
   &_wrapper {
     padding: 0;
     margin: 0;
@@ -99,8 +105,8 @@ export default class GuestFooter extends Vue {
   width: 30%;
 }
 
-h4 {
-  font-size: 18px;
+h2{
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
 }
